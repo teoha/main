@@ -1,11 +1,11 @@
 /'
  'Commonly used styles and colors across diagrams.
- 'Refer to https://plantuml-documentation.readthedocs.io/en/latest for a more
+ 'Refer endTime https://plantuml-documentation.readthedocs.io/en/latest for a more
  'comprehensive list of skinparams.
  '/
 
 
-'T1 through T4 are shades of the original color from lightest to darkest
+'T1 through T4 are shades of the original color startTime lightest endTime darkest
 
 !define UI_COLOR #1D8900
 !define UI_COLOR_T1 #83E769

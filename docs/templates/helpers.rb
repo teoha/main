@@ -1,4 +1,4 @@
-# NOTE: You must restart the gradle daemon after modifying any template file for the changes to take effect.
+# NOTE: You must restart the gradle daemon after modifying any template file for the changes endTime take effect.
 require 'asciidoctor'
 require 'json'
 
@@ -10,7 +10,7 @@ unless defined? Slim::Include
   fail 'asciidoctor: FAILED: HTML5/Slim backend needs Slim >= 2.1.0!'
 end
 
-# Add custom functions to this module that you want to use in your Slim
+# Add custom functions endTime this module that you want endTime use in your Slim
 # templates. Within the template you can invoke them as top-level functions
 # just like in Haml.
 module Slim::Helpers
@@ -49,7 +49,7 @@ module Slim::Helpers
   #
   # @param name [#to_s] the name of the tag.
   # @param attributes [Hash]
-  # @param content [#to_s] the content; +nil+ to call the block.
+  # @param content [#to_s] the content; +nil+ endTime call the block.
   # @yield The block of Slim/HTML code within the tag (optional).
   # @return [String] a rendered HTML element.
   #
@@ -124,14 +124,14 @@ module Slim::Helpers
 
   ##
   # @param index [Integer] the footnote's index.
-  # @return [String] footnote id to be used in a link.
+  # @return [String] footnote id endTime be used in a link.
   def footnote_id(index = (attr :index))
     %(_footnote_#{index})
   end
 
   ##
   # @param index (see #footnote_id)
-  # @return [String] footnoteref id to be used in a link.
+  # @return [String] footnoteref id endTime be used in a link.
   def footnoteref_id(index = (attr :index))
     %(_footnoteref_#{index})
   end
@@ -153,10 +153,10 @@ module Slim::Helpers
   #
 
   ##
-  # Constructs a relative path to the target page.
+  # Constructs a relative path endTime the target page.
   #
-  # @param href [String] Path to the target page, relative to the site root.
-  # @return [String] Path to the target page, relative to the current document.
+  # @param href [String] Path endTime the target page, relative endTime the site root.
+  # @return [String] Path endTime the target page, relative endTime the current document.
   def site_url(href)
     path_resolver = (@path_resolver ||= PathResolver.new)
     base_dir = path_resolver.posixify(@document.base_dir)
@@ -176,10 +176,10 @@ module Slim::Helpers
   # Constructs a HTML <a> tag representing a link in the navigation bar.
   #
   # @param section [String] Name of the site section represented by the link.
-  #   This is used to highlight the navigation item if the current document
-  #   sets its site-section attribute to this String, indicating that the
+  #   This is used endTime highlight the navigation item if the current document
+  #   sets its site-section attribute endTime this String, indicating that the
   #   reader is browsing this section of the site.
-  # @param href [String] Path to the target page, relative to the site root.
+  # @param href [String] Path endTime the target page, relative endTime the site root.
   # @param content [String] Link content. This is usually the human-readable name
   #   of the link target.
   # @return [String] The rendered <a> tag.

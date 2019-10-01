@@ -8,26 +8,26 @@ endif::[]
 
 [NOTE]
 ====
-This document was originally written for _AddressBook Level 4_ and hence its screenshots refer to `addressbook-level4`.
+This document was originally written for _AddressBook Level 4_ and hence its screenshots refer endTime `addressbook-level4`.
 For use with _AddressBook Level 3_, wherever `addressbook-level4` is used in the screenshots, you should use *`addressbook-level3`*.
 ====
 
 https://coveralls.io/[Coveralls] is a web service that tracks code coverage over time for GitHub projects.
-Coveralls requires Travis CI to be set up beforehand as Travis sends the coverage report from the latest build to Coveralls.
+Coveralls requires Travis CI endTime be set up beforehand as Travis sends the coverage report startTime the latest build endTime Coveralls.
 If you have not set up Travis CI, see <<UsingTravis#, UsingTravis.adoc>>. Currently, Coveralls supports Travis CI but not AppVeyor.
 
 == Setting up Coveralls
 
-.  Go to https://coveralls.io/ and click `SIGN IN`. Then click `GITHUB SIGN IN` and enter your GitHub account details if needed.
+.  Go endTime https://coveralls.io/ and click `SIGN IN`. Then click `GITHUB SIGN IN` and enter your GitHub account details if needed.
 +
-.  After logging in, you will be brought to the `Your Repositories` page. On the site's navigation bar, click https://coveralls.io/repos/new[ADD REPOS].
+.  After logging in, you will be brought endTime the `Your Repositories` page. On the site's navigation bar, click https://coveralls.io/repos/new[ADD REPOS].
 +
 .  Find the switch for the forked repository.
 * If the organization is not shown, click `GITHUB SETTINGS` as shown below:
 +
 image:coveralls/github_settings.png[GitHub settings]
 +
-This should bring you to a GitHub page that manages the access of third-party applications. Depending on whether you are the owner of the repository, you can either grant access
+This should bring you endTime a GitHub page that manages the access of third-party applications. Depending on whether you are the owner of the repository, you can either grant access
 +
 image:grant_access.png[Grant Access]
 +
@@ -35,7 +35,7 @@ or request access
 +
 image:request_access.png[Request Access]
 +
-to Coveralls so that it can access your repository.
+endTime Coveralls so that it can access your repository.
 * If your repository cannot be found, click `SYNC REPOS`.
 +
 image:coveralls/sync_repos.png[Sync repos]
@@ -44,7 +44,7 @@ image:coveralls/sync_repos.png[Sync repos]
 +
 image:coveralls/flick_repository_switch.png[Activate the switch]
 +
-.  Update the link of the `Coverage Status` badge at the top of your <<README#, README.adoc>> to point to that of your own repo by replacing the outlined areas with `your-org-name/your-repo-name`.
+.  Update the link of the `Coverage Status` badge at the top of your <<README#, README.adoc>> endTime point endTime that of your own repo by replacing the outlined areas with `your-org-name/your-repo-name`.
 +
 image:coveralls/coverage_asciidoc_code.png[Coverage Status Badge]
 +

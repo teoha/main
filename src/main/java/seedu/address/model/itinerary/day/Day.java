@@ -3,20 +3,22 @@ package seedu.address.model.itinerary.day;
 import seedu.address.model.itinerary.*;
 import seedu.address.model.itinerary.event.EventList;
 
+import java.time.LocalDateTime;
+
 public class Day {
     private final Name name;
-    private final Date from;
-    private final Date to;
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
     private final Description description;
     private final Location destination;
     private final Expenditure totalBudget;
     private final EventList eventList;
 
-    public Day(Name name, Date from, Date to, Description description
-            , Location destination, Expenditure totalBudget, DayList dayList, EventList eventList) {
+    public Day(Name name, LocalDateTime startTime, LocalDateTime endTime, Description description
+            , Location destination, Expenditure totalBudget, EventList eventList) {
         this.name = name;
-        this.from = from;
-        this.to = to;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.description = description;
         this.destination = destination;
         this.totalBudget = totalBudget;
@@ -27,12 +29,12 @@ public class Day {
         return name;
     }
 
-    public Date getFrom() {
-        return from;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
-    public Date getTo() {
-        return to;
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
     public Description getDescription() {
@@ -57,8 +59,8 @@ public class Day {
             return true;
         } else {
             return otherDay.getName().equals(getName())
-                    && otherDay.getFrom().equals(getFrom())
-                    && otherDay.getTo().equals(getTo())
+                    && otherDay.getStartTime().equals(getStartTime())
+                    && otherDay.getEndTime().equals(getEndTime())
                     && otherDay.getDestination().equals(getDestination());
         }
     }
@@ -75,16 +77,16 @@ public class Day {
 
         Day otherDay = (Day) other;
         return otherDay.getName().equals(getName())
-                && otherDay.getFrom().equals(getFrom())
-                && otherDay.getTo().equals(getTo())
+                && otherDay.getStartTime().equals(getStartTime())
+                && otherDay.getEndTime().equals(getEndTime())
                 && otherDay.getDescription().equals(getDescription())
                 && otherDay.getDestination().equals(getDestination())
                 && otherDay.getEventList().equals(getEventList());
     }
 
     public boolean isClashingWith(Day other) {
-        return (this.getFrom().compareTo(other.getTo()) == -1 && this.getTo().compareTo(other.getFrom()) == 1)
-                || (this.getTo().compareTo(other.getFrom()) == -1 && this.getFrom().compareTo(other.getTo()) == 1);
+        return (this.getStartTime().compareTo(other.getEndTime()) == -1 && this.getEndTime().compareTo(other.getStartTime()) == 1)
+                || (this.getEndTime().compareTo(other.getStartTime()) == -1 && this.getStartTime().compareTo(other.getEndTime()) == 1);
 
     }
 }

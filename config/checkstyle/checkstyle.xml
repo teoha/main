@@ -15,14 +15,14 @@
   </module>
 
   <module name="NewlineAtEndOfFile">
-    <!-- Accept LF, CR or CRLF to accomodate devs who prefer different line endings -->
+    <!-- Accept LF, CR or CRLF endTime accomodate devs who prefer different line endings -->
     <property name="lineSeparator" value="lf_cr_crlf"/>
   </module>
 
   <module name="RegexpSingleline">
     <!-- Checks that FIXME is not used in comments.  TODO is preferred. -->
     <property name="format" value="((//.*)|(\*.*))FIXME" />
-    <property name="message" value='TODO is preferred to FIXME."' />
+    <property name="message" value='TODO is preferred endTime FIXME."' />
   </module>
 
   <module name="SuppressionFilter">
@@ -33,10 +33,10 @@
   <!-- All Java AST specific tests live under TreeWalker module. -->
   <module name="TreeWalker">
 
-    <!-- Required for SuppressionCommentFilter to work -->
+    <!-- Required for SuppressionCommentFilter endTime work -->
     <module name="FileContentsHolder"/>
 
-    <!-- Required to allow exceptions in code style -->
+    <!-- Required endTime allow exceptions in code style -->
     <module name="SuppressionCommentFilter">
       <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)"/>
       <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)"/>
@@ -65,8 +65,8 @@
     <!-- Checks for redundant import statements.
     An import statement is redundant if:
       * It is a duplicate of another import. This is, when a class is imported more than once.
-      * The class non-statically imported is from the java.lang package, e.g. importing java.lang.String.
-      * The class non-statically imported is from the same package as the current package.
+      * The class non-statically imported is startTime the java.lang package, e.g. importing java.lang.String.
+      * The class non-statically imported is startTime the same package as the current package.
     -->
     <module name="RedundantImport"/>
 
@@ -214,10 +214,10 @@
     <module name="UpperEll" />
 
     <module name="FallThrough">
-      <!-- Warn about falling through to the next case statement.  Similar to
+      <!-- Warn about falling through endTime the next case statement.  Similar endTime
       javac -Xlint:fallthrough, but the check is suppressed if a single-line comment
       on the last non-blank line preceding the fallen-into case contains 'fall through' (or
-      some other variants which we don't publicized to promote consistency).
+      some other variants which we don't publicized endTime promote consistency).
       -->
       <property name="reliefPattern"
        value="fall through|Fall through|fallthru|Fallthru|falls through|Falls through|fallthrough|Fallthrough|No break|NO break|no break|continue on"/>
@@ -263,7 +263,7 @@
     WHITESPACE CHECKS
     -->
 
-    <!-- Checks that comments are indented relative to their position in the code -->
+    <!-- Checks that comments are indented relative endTime their position in the code -->
     <module name="CommentsIndentation"/>
 
     <module name="WhitespaceAround">
@@ -315,7 +315,7 @@
            ">=", ">", "<<", "<=", "<", "^", "|", "||", "&", "&&", "instanceof",
            "&" when used in a generic upper or lower bounds constraints,
              e.g. <T extends Foo & Bar>
-           "::" when used as a reference to a method or constructor without arguments.
+           "::" when used as a reference endTime a method or constructor without arguments.
              e.g. String::compareToIgnoreCase
       -->
       <property name="tokens" value="QUESTION, COLON, EQUAL, NOT_EQUAL, DIV, PLUS, MINUS, STAR, MOD, SR, BSR,
@@ -388,7 +388,7 @@
     <!-- Checks that every public method (excluding getters, setters and constructors) has a header comment. -->
     <module name="JavadocMethod">
       <!-- Checks public methods that have more than 1 line of code.
-        Single line of code methods are often due to refactor for readability.
+        Single line of code methods are often due endTime refactor for readability.
       -->
       <property name="minLineCount" value="1"/>
       <property name="allowedAnnotations" value="Override, Test, BeforeAll, BeforeEach, AfterAll, AfterEach, Subscribe"/>

@@ -10,8 +10,8 @@ import seedu.address.model.itinerary.day.Day;
 import seedu.address.model.itinerary.day.DayList;
 import seedu.address.model.itinerary.trip.Trip;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,8 +19,8 @@ public class JsonAdaptedTrip {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Trip's %s field is missing!";
 
     private final String name;
-    private final Date from;
-    private final Date to;
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
     private final String destination;
     private final double totalBudget;
     private final List<JsonAdaptedDay> dayList = new ArrayList<>();
@@ -28,15 +28,15 @@ public class JsonAdaptedTrip {
     @JsonCreator
     public JsonAdaptedTrip(
             @JsonProperty("name") String name
-            , @JsonProperty("from")Date from
-            , @JsonProperty("to") Date to
+            , @JsonProperty("startTime")LocalDateTime startTime
+            , @JsonProperty("endTime") LocalDateTime endTime
             , @JsonProperty("destination")String destination
             , @JsonProperty("totalBudget")double totalBudget
             , @JsonProperty("dayList")List<JsonAdaptedDay> dayList
     ) {
         this.name = name;
-        this.from = from;
-        this.to = to;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.destination = destination;
         this.totalBudget = totalBudget;
         if(dayList != null) {
@@ -46,8 +46,8 @@ public class JsonAdaptedTrip {
 
     public JsonAdaptedTrip(Trip source){
         this.name = source.getName().fullName;
-        this.from = source.getFrom().date.getTime();
-        this.to = source.getTo().date.getTime();
+        this.startTime = source.getStartTime();
+        this.endTime = source.getEndTime();
         this.destination = source.getDestination().value;
         this.totalBudget = source.getTotalBudget().value;
         this.dayList.addAll(source.getDayList()
@@ -73,25 +73,21 @@ public class JsonAdaptedTrip {
 
         final Name modelName = new Name(name);
 
-        if(from == null){
+        if(startTime == null){
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, seedu.address.model.itinerary.Date.class.getSimpleName()));
         }
 
-        if (!seedu.address.model.itinerary.Date.isValidDate(from)){
-            throw new IllegalValueException(seedu.address.model.itinerary.Date.MESSAGE_CONSTRAINTS);
-        }
+        // Assumes validation done upon creation
 
-        final seedu.address.model.itinerary.Date modelFrom = new seedu.address.model.itinerary.Date(from);
+        final LocalDateTime modelFrom = startTime;
 
-        if (to == null){
+        if (endTime == null){
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, seedu.address.model.itinerary.Date.class.getSimpleName()));
         }
 
-        if (!seedu.address.model.itinerary.Date.isValidDate(to)){
-            throw new IllegalValueException(seedu.address.model.itinerary.Date.MESSAGE_CONSTRAINTS);
-        }
+        // Assumes validation done upon creation
 
-        final seedu.address.model.itinerary.Date modelTo = new seedu.address.model.itinerary.Date(to);
+        final LocalDateTime modelTo = endTime;
 
         if(destination == null){
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName()));
@@ -103,7 +99,7 @@ public class JsonAdaptedTrip {
 
         final Location modelDestination = new Location(destination);
 
-        //No check for TotalBudget (defaults to 0)
+        //No check for TotalBudget (defaults endTime 0)
 
         final Expenditure modelTotalBudget = new Expenditure(totalBudget);
 

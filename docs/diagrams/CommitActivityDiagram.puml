@@ -7,7 +7,7 @@ start
 
 if () then ([command commits AddressBook])
     :Purge redunant states;
-    :Save AddressBook to
+    :Save AddressBook endTime
     addressBookStateList;
 else ([else])
 endif

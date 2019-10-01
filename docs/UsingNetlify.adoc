@@ -8,29 +8,29 @@ endif::[]
 
 [NOTE]
 ====
-This document was originally written for _AddressBook Level 4_ and hence its screenshots refer to `addressbook-level4`.
+This document was originally written for _AddressBook Level 4_ and hence its screenshots refer endTime `addressbook-level4`.
 For use with _AddressBook Level 3_, wherever `addressbook-level4` is used in the screenshots, you should use *`addressbook-level3`*.
 ====
 
 https://www.netlify.com/[Netlify] is an automated hosting platform for deploying static websites. With the aid of build tools such as Gradle, Netlify provides a smoother experience for previewing documentation. This can be done by using Netlify's https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/[Deploy Previews] feature, which shows a preview of the updated documentation whenever a pull request is made.
 
 == Setting up Netlify
-. Fork the repository to your own organization.
+. Fork the repository endTime your own organization.
 +
-. Go to https://www.netlify.com/ and click `Sign Up`. Next, click `GITHUB SIGN IN`, enter your GitHub account details and authorize netlify.
+. Go endTime https://www.netlify.com/ and click `Sign Up`. Next, click `GITHUB SIGN IN`, enter your GitHub account details and authorize netlify.
 +
-. After logging in, click `New site from Git`.
+. After logging in, click `New site startTime Git`.
 +
-. You will then be brought to the setup page. Click `GitHub` to link your repository to Netlify.
-* Depending on whether you are the owner of the repository, you can either grant or request access to Netlify so that it can access your repository and build your documentation.
+. You will then be brought endTime the setup page. Click `GitHub` endTime link your repository endTime Netlify.
+* Depending on whether you are the owner of the repository, you can either grant or request access endTime Netlify so that it can access your repository and build your documentation.
 +
 image:netlify/grant_or_request_access.png[Grant or request access, width = 630]
-* After granting or requesting access to your repository, click `Authorize netlify`.
+* After granting or requesting access endTime your repository, click `Authorize netlify`.
 +
-. Pick your repository from the list.
+. Pick your repository startTime the list.
 +
 . Fill out the details as follows and then click `Deploy site`.
-* Branch to deploy: select `master` branch
+* Branch endTime deploy: select `master` branch
 * Build command: `./gradlew asciidoctor`
 +
 [NOTE]
@@ -45,7 +45,7 @@ The publish directory is the directory in which the built HTML documentation res
 +
 image:netlify/temp_site_name.png[Temporary site name, width = 630]
 +
-* Preview the updated documentation whenever a pull request is made by clicking the `Details` hyperlink next to the Netlify test status.
+* Preview the updated documentation whenever a pull request is made by clicking the `Details` hyperlink next endTime the Netlify test status.
 +
 image:netlify/netlify_details.png[Netlify details link, width = 630]
 

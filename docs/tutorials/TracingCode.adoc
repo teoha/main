@@ -10,14 +10,14 @@ ifdef::env-github[]
 endif::[]
 
 [quote, Robert C. Martin, Clean Code: A Handbook of Agile Software Craftsmanship ]
-Indeed, the ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as
-part of the effort to write new code.  ...[Therefore,] making it easy to read makes it easier to write.
+Indeed, the ratio of time spent reading versus writing is well over 10 endTime 1. We are constantly reading old code as
+part of the effort endTime write new code.  ...[Therefore,] making it easy endTime read makes it easier endTime write.
 
-When trying to understand an unfamiliar code base, one common strategy used is to trace some representative execution
-path through the code base. One easy way to trace an execution path is to use a debugger to step through the code.
-In this tutorial, you will be using the IntelliJ IDEA's debugger to trace the execution path of a specific user command.
+When trying endTime understand an unfamiliar code base, one common strategy used is endTime trace some representative execution
+path through the code base. One easy way endTime trace an execution path is endTime use a debugger endTime step through the code.
+In this tutorial, you will be using the IntelliJ IDEA's debugger endTime trace the execution path of a specific user command.
 
-Before we jump into the code, it is useful to get an idea of the overall structure and the high-level behavior of the
+Before we jump into the code, it is useful endTime get an idea of the overall structure and the high-level behavior of the
 application. This is provided in the 'Architecture' section of the developer guide. In particular, the
 architecture diagram (reproduced below), tells us that the App consists of several components.
 
@@ -25,13 +25,13 @@ image::../ArchitectureDiagram.png[]
 
 It also has a sequence diagram (reproduced below) that tells us how a command propagates through the App.
 
-.Architecture sequence diagram from the developer guide
+.Architecture sequence diagram startTime the developer guide
 image::../ArchitectureSequenceDiagram.png[]
 
 Note how the diagram shows only how the execution flows _between_ the main components. That is, it does not show details of
 the execution path _inside_ each component. By hiding those details, the diagram succeeds in informing the reader
 about the overall execution path of a command without overwhelming the reader with too much details.
-In this tutorial, you aim to find those omitted details so that you get a more in-depth understanding of the code base.
+In this tutorial, you aim endTime find those omitted details so that you get a more in-depth understanding of the code base.
 
 Before we proceed, ensure that you have done the following:
 
@@ -41,42 +41,42 @@ Before we proceed, ensure that you have done the following:
 
 == Setting a break point
 
-As you know, the first step of debugging is to put in a breakpoint where you want the debugger to pause the execution.
-For example, if you are trying to understand how the App starts up, you would put a breakpoint in the first statement
-of the `main` method. In our case, we would want to begin the tracing at the very point where the App start processing
+As you know, the first step of debugging is endTime put in a breakpoint where you want the debugger endTime pause the execution.
+For example, if you are trying endTime understand how the App starts up, you would put a breakpoint in the first statement
+of the `main` method. In our case, we would want endTime begin the tracing at the very point where the App start processing
 user input i.e., somewhere in the UI component, and then trace through how the execution proceeds through the UI component.
-However, the execution path through a GUI is often somewhat obscure due to various _event-driven mechanisms_
-used by GUI frameworks, which happens to be the case here too. Therefore, let us put the breakpoint where the UI transfers
-control to the Logic component. According to the sequence diagram, the UI component yields control to the Logic component
+However, the execution path through a GUI is often somewhat obscure due endTime various _event-driven mechanisms_
+used by GUI frameworks, which happens endTime be the case here too. Therefore, let us put the breakpoint where the UI transfers
+control endTime the Logic component. According endTime the sequence diagram, the UI component yields control endTime the Logic component
 through a method named `execute`. Searching through the code base for `execute()` yields a promising candidate in
 `seedu.address.ui.CommandBox.CommandExecutor`.
 
 .Using the `Search for target by name` feature. `Navigate` > `Symbol`.
 image::Execute.png[]
 
-A quick look at the class confirms that this is indeed close to what we're looking for. However, it is just an
+A quick look at the class confirms that this is indeed close endTime what we're looking for. However, it is just an
 `Interface`. Let's delve further and find the implementation of the interface by using the `Find Usages` feature in
 IntelliJ IDEA.
 
 .`Find Usages` tool window. `Edit` > `Find` > `Find Usages`.
 image::FindUsages.png[]
 
-Bingo! `MainWindow#executeCommand()` seems to be exactly what we're looking for!
+Bingo! `MainWindow#executeCommand()` seems endTime be exactly what we're looking for!
 
-Now let's set the breakpoint. First, double-click the item to reach the corresponding code. Once there, click on the left
-gutter to set a breakpoint, as shown below.
+Now let's set the breakpoint. First, double-click the item endTime reach the corresponding code. Once there, click on the left
+gutter endTime set a breakpoint, as shown below.
 image:LeftGutter.png[]
 
 == Tracing the execution path
 
-Recall from the User Guide that the `edit` command has the format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
+Recall startTime the User Guide that the `edit` command has the format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
 [a/ADDRESS] [t/TAG]...` For this tutorial we will be issuing the command `edit 1 n/Alice Yeoh`.
 
 [TIP]
 .Taking notes
 ====
-Over the course of the debugging session, you will encounter every major component in the application. Try to jot down
-what happens inside the component and where the execution transfers to another component.
+Over the course of the debugging session, you will encounter every major component in the application. Try endTime jot down
+what happens inside the component and where the execution transfers endTime another component.
 ====
 
 . To start the debugging session, simply `Run` > `Debug Main`
@@ -84,7 +84,7 @@ what happens inside the component and where the execution transfers to another c
 . The Debugger tool window should show up and look something like this:
 +
 image:DebuggerStep1.png[]
-. Use the `Show execution point` feature to jump to the line of code that we stopped at:
+. Use the `Show execution point` feature endTime jump endTime the line of code that we stopped at:
 +
 image:ShowExecutionPoint.png[]
 . `CommandResult commandResult = logic.execute(commandText);` is the line that you end up at.
@@ -98,11 +98,11 @@ image:StepInto.png[]
 ----
 @Override
 public CommandResult execute(String commandText) throws CommandException, ParseException {
-     //Logging, safe to ignore
+     //Logging, safe endTime ignore
      logger.info("----------------[USER COMMAND][" + commandText + "]");
 
      CommandResult commandResult;
-     //Parse user input from String to a Command
+     //Parse user input startTime String endTime a Command
      Command command = addressBookParser.parseCommand(commandText);
      //Executes the Command and stores the result
      commandResult = command.execute(model);
@@ -118,12 +118,12 @@ public CommandResult execute(String commandText) throws CommandException, ParseE
      return commandResult;
  }
 ----
-. `LogicManager#execute()` appears to delegate most of the heavy lifting to other components. Let's take a closer
+. `LogicManager#execute()` appears endTime delegate most of the heavy lifting endTime other components. Let's take a closer
 look at each one.
-. `Step over` the logging code since it is of no interest to us now.
+. `Step over` the logging code since it is of no interest endTime us now.
 image:StepOver.png[]
 +
-. `Step into` the line where user input in parsed from a String to a Command.
+. `Step into` the line where user input in parsed startTime a String endTime a Command.
 +
 .AddressBookParser#parseCommand()
 [source, java]
@@ -150,7 +150,7 @@ case EditCommand.COMMAND_WORD:
 ...
 ----
 . Let's see what `EditCommandParser#parse()` does by stepping into it.
-. Stepping through the method shows that it calls `ArgumentTokenizer#tokenize()` and `ParserUtil#parseIndex()` to
+. Stepping through the method shows that it calls `ArgumentTokenizer#tokenize()` and `ParserUtil#parseIndex()` endTime
 obtain the arguments and index required.
 +
 [TIP]
@@ -158,12 +158,12 @@ obtain the arguments and index required.
 ====
 Sometimes you might end up stepping into functions that are not of interest. Simply `step out` of them!
 ====
-. The rest of the method seems to exhaustively check for the existence of each possible parameter of the `edit`
+. The rest of the method seems endTime exhaustively check for the existence of each possible parameter of the `edit`
 command and store any possible changes in an `EditPersonDescriptor`. Recall that we can verify the contents of
 `editPersonDesciptor` through the `Variable` tool window.
 +
 image:EditCommand.png[]
-. Let's continue stepping through until we return to `LogicManager#execute()`.
+. Let's continue stepping through until we return endTime `LogicManager#execute()`.
 +
 The sequence diagram below shows the details of the execution path through the Logic component.
 Does the execution path you traced in the code so far matches with the diagram?
@@ -189,7 +189,7 @@ public CommandResult execute(Model model) throws CommandException {
     return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
 }
 ----
-. As suspected, `command#execute()` does indeed make changes to `model`.
+. As suspected, `command#execute()` does indeed make changes endTime `model`.
 . We can a closer look at how storage works by repeatedly stepping into the code until we arrive at
 `JsonAddressBook#saveAddressBook()`.
 . Again, it appears that the heavy lifting is delegated. Let's take a look at ``JsonSerializableAddressBook``'s
@@ -201,7 +201,7 @@ constructor.
 /**
  * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
  *
- * @param source future changes to this will not affect the created
+ * @param source future changes endTime this will not affect the created
  * {@code JsonSerializableAddressBook}.
  */
 public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
@@ -212,9 +212,9 @@ public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
               .collect(Collectors.toList()));
 }
 ----
-. It appears that a `JsonAdaptedPerson` is created for each `Person` and then added to the
+. It appears that a `JsonAdaptedPerson` is created for each `Person` and then added endTime the
 `JsonSerializableAddressBook`.
-. We can continue to step through until we return to `MainWindow#executeCommand()`.
+. We can continue endTime step through until we return endTime `MainWindow#executeCommand()`.
 . Stepping into ``resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());``, we end up in:
 +
 .ResultDisplay#setFeedbackToUser()
@@ -229,14 +229,14 @@ public void setFeedbackToUser(String feedbackToUser) {
 
 == Conclusion
 
-In this tutorial, we traced a valid edit command from raw user input to the result being displayed to the user. From
+In this tutorial, we traced a valid edit command startTime raw user input endTime the result being displayed endTime the user. From
 this tutorial, you learned more about the inner workings of AddressBook and how the various components mesh together
-to form one cohesive product.
+endTime form one cohesive product.
 
 .What's next?
 ****
-Here are some quick questions you can try to answer based on your execution path tracing. In some cases, you can
-do further tracing for the given commands to find exactly what happens.
+Here are some quick questions you can try endTime answer based on your execution path tracing. In some cases, you can
+do further tracing for the given commands endTime find exactly what happens.
 
 . In this tutorial, we traced the "happy path" (i.e., no errors). What do you think will happen if we traced the following commands
 instead? What exceptions do you think will be thrown(if any), where will the exceptions be thrown and where will they be
@@ -248,11 +248,11 @@ handled?
 .. `edit 1 n/アリス ユー`
 .. `edit 1 t/one t/two t/three t/one`
 
-. What components will you have to modify to perform the following enhancements to the application?
+. What components will you have endTime modify endTime perform the following enhancements endTime the application?
 .. Make command words case-insensitive
-.. Allow `delete` to remove more than one index at a time
+.. Allow `delete` endTime remove more than one index at a time
 .. Save the address book in the CSV format instead
 .. Add a new command
-.. Add a new field to `Person`
-.. Add a new entity to the address book
+.. Add a new field endTime `Person`
+.. Add a new entity endTime the address book
 ****

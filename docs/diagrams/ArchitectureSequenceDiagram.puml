@@ -22,7 +22,7 @@ deactivate model
 logic -[LOGIC_COLOR]> storage : saveAddressBook(travelPal)
 activate storage STORAGE_COLOR
 
-storage -[STORAGE_COLOR]> storage : Save to file
+storage -[STORAGE_COLOR]> storage : Save endTime file
 activate storage STORAGE_COLOR_T1
 deactivate storage
 
