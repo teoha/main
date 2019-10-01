@@ -28,7 +28,7 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#getTravelPal()
      */
-    ReadOnlyTravelPal getAddressBook();
+    ReadOnlyTravelPal getTravelPal();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();

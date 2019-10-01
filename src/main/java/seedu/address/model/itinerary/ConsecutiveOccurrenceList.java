@@ -51,7 +51,7 @@ public abstract class ConsecutiveOccurrenceList<T> implements Iterable<T>{
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public abstract void set(List<T> entities);
+    public abstract void set(List<T> occurrences);
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
@@ -78,8 +78,8 @@ public abstract class ConsecutiveOccurrenceList<T> implements Iterable<T>{
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code occurrences} contains only unique occurrences.
      */
-    public abstract boolean areConsecutive(List<T> persons);
+    public abstract boolean areConsecutive(List<T> occurrences);
 
 }

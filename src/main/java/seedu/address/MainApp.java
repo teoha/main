@@ -52,7 +52,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        TravelPalStorage travelPalStorage = new JsonTravelPalStorage(userPrefs.getAddressBookFilePath());
+        TravelPalStorage travelPalStorage = new JsonTravelPalStorage(userPrefs.getTravelPalFilePath());
         storage = new StorageManager(travelPalStorage, userPrefsStorage);
 
         initLogging(config);
@@ -70,14 +70,14 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyTravelPal> addressBookOptional;
+        Optional<ReadOnlyTravelPal> travelPalOptional;
         ReadOnlyTravelPal initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            travelPalOptional = storage.readTravelPal();
+            if (!travelPalOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TravelPal");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = travelPalOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TravelPal");
             initialData = new TravelPal();

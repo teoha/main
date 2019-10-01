@@ -21,12 +21,12 @@ public interface Storage extends TravelPalStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getTravelPalFilePath();
 
     @Override
-    Optional<ReadOnlyTravelPal> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTravelPal> readTravelPal() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyTravelPal addressBook) throws IOException;
+    void saveTravelPal(ReadOnlyTravelPal travelPal) throws IOException;
 
 }

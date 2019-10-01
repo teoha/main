@@ -155,7 +155,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyTravelPal addressBook, Path filePath) throws IOException {
+        public void saveTravelPal(ReadOnlyTravelPal travelPal, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

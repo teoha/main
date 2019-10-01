@@ -27,22 +27,22 @@ public class JsonTravelPalStorage implements TravelPalStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getTravelPalFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyTravelPal> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyTravelPal> readTravelPal() throws DataConversionException {
+        return readTravelPal(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readTravelPal()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyTravelPal> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyTravelPal> readTravelPal(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableTravelPal> jsonAddressBook = JsonUtil.readJsonFile(
@@ -60,21 +60,21 @@ public class JsonTravelPalStorage implements TravelPalStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTravelPal addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveTravelPal(ReadOnlyTravelPal travelPal) throws IOException {
+        saveTravelPal(travelPal, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyTravelPal)}.
+     * Similar to {@link #saveTravelPal(ReadOnlyTravelPal)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyTravelPal addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveTravelPal(ReadOnlyTravelPal travelPal, Path filePath) throws IOException {
+        requireNonNull(travelPal);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableTravelPal(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableTravelPal(travelPal), filePath);
     }
 
 }

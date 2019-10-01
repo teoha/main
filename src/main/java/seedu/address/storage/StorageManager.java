@@ -48,30 +48,30 @@ public class StorageManager implements Storage {
     // ================ TravelPal methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return travelPalStorage.getAddressBookFilePath();
+    public Path getTravelPalFilePath() {
+        return travelPalStorage.getTravelPalFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyTravelPal> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(travelPalStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyTravelPal> readTravelPal() throws DataConversionException, IOException {
+        return readTravelPal(travelPalStorage.getTravelPalFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyTravelPal> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyTravelPal> readTravelPal(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return travelPalStorage.readAddressBook(filePath);
+        return travelPalStorage.readTravelPal(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTravelPal addressBook) throws IOException {
-        saveAddressBook(addressBook, travelPalStorage.getAddressBookFilePath());
+    public void saveTravelPal(ReadOnlyTravelPal travelPal) throws IOException {
+        saveTravelPal(travelPal, travelPalStorage.getTravelPalFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTravelPal addressBook, Path filePath) throws IOException {
+    public void saveTravelPal(ReadOnlyTravelPal travelPal, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        travelPalStorage.saveAddressBook(addressBook, filePath);
+        travelPalStorage.saveTravelPal(travelPal, filePath);
     }
 
 }

@@ -31,7 +31,7 @@ public class JsonTravelPalStorageTest {
     }
 
     private java.util.Optional<ReadOnlyTravelPal> readAddressBook(String filePath) throws Exception {
-        return new JsonTravelPalStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new JsonTravelPalStorage(Paths.get(filePath)).readTravelPal(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -67,21 +67,21 @@ public class JsonTravelPalStorageTest {
         JsonTravelPalStorage jsonAddressBookStorage = new JsonTravelPalStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyTravelPal readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonAddressBookStorage.saveTravelPal(original, filePath);
+        ReadOnlyTravelPal readBack = jsonAddressBookStorage.readTravelPal(filePath).get();
         assertEquals(original, new TravelPal(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonAddressBookStorage.saveTravelPal(original, filePath);
+        readBack = jsonAddressBookStorage.readTravelPal(filePath).get();
         assertEquals(original, new TravelPal(readBack));
 
         // Save and read without specifying file path
         original.addPerson(IDA);
-        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
+        jsonAddressBookStorage.saveTravelPal(original); // file path not specified
+        readBack = jsonAddressBookStorage.readTravelPal().get(); // file path not specified
         assertEquals(original, new TravelPal(readBack));
 
     }
@@ -97,7 +97,7 @@ public class JsonTravelPalStorageTest {
     private void saveAddressBook(ReadOnlyTravelPal addressBook, String filePath) {
         try {
             new JsonTravelPalStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveTravelPal(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

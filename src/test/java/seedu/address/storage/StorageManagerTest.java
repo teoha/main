@@ -55,14 +55,14 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonTravelPalStorageTest} class.
          */
         TravelPal original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyTravelPal retrieved = storageManager.readAddressBook().get();
+        storageManager.saveTravelPal(original);
+        ReadOnlyTravelPal retrieved = storageManager.readTravelPal().get();
         assertEquals(original, new TravelPal(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getTravelPalFilePath());
     }
 
 }

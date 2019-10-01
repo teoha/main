@@ -10,15 +10,15 @@ public class Trip {
     private final Name name;
     private final Date from;
     private final Date to;
-    private final Location destintaion;
+    private final Location destination;
     private final Expenditure totalBudget;
     private final DayList dayList;
 
-    public Trip(Name name, Date from, Date to, Location destintaion, Expenditure totalBudget, DayList dayList) {
+    public Trip(Name name, Date from, Date to, Location destination, Expenditure totalBudget, DayList dayList) {
         this.name = name;
         this.from = from;
         this.to = to;
-        this.destintaion = destintaion;
+        this.destination = destination;
         this.totalBudget = totalBudget;
         this.dayList = dayList;
     }
@@ -35,8 +35,8 @@ public class Trip {
         return to;
     }
 
-    public Location getDestintaion() {
-        return destintaion;
+    public Location getDestination() {
+        return destination;
     }
 
     public Expenditure getTotalBudget() {
@@ -58,7 +58,7 @@ public class Trip {
             return otherTrip.getName().equals(getName())
                     && otherTrip.getFrom().equals(getFrom())
                     && otherTrip.getTo().equals(getTo())
-                    && otherTrip.getDestintaion().equals(getDestintaion());
+                    && otherTrip.getDestination().equals(getDestination());
         }
     }
 
@@ -76,7 +76,7 @@ public class Trip {
         return otherTrip.getName().equals(getName())
                 && otherTrip.getFrom().equals(getFrom())
                 && otherTrip.getTo().equals(getTo())
-                && otherTrip.getDestintaion().equals(getDestintaion())
+                && otherTrip.getDestination().equals(getDestination())
                 && otherTrip.getDayList().equals(getDayList());
     }
 

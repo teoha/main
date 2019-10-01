@@ -18,8 +18,17 @@ public class DayList extends ConsecutiveOccurrenceList<Day> {
     }
 
     @Override
+    public boolean containsClashing(Day toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isClashingWith);
+    }
+
+    @Override
     public void add(Day toAdd) {
         requireNonNull(toAdd);
+        if(containsClashing(toAdd)){
+            throw new ClashingDayException();
+        }
         internalList.add(toAdd);
     }
 
@@ -47,20 +56,23 @@ public class DayList extends ConsecutiveOccurrenceList<Day> {
     }
 
     @Override
-    public void set(ConsecutiveOccurrenceList<Day> replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+    public void set(List<Day> occurrences) {
+        requireAllNonNull(occurrences);
+        if(!areConsecutive(occurrences)){
+            throw new ClashingDayException();
+        }
+        internalList.setAll(occurrences);
     }
 
     @Override
-    public void set(List<Day> persons) {
-        requireAllNonNull(persons);
-
-        internalList.setAll(persons);
-    }
-
-    @Override
-    public boolean areConsecutive(List<Day> persons) {
+    public boolean areConsecutive(List<Day> occurrences) {
+        for (int i = 0; i < occurrences.size() - 1; i++) {
+            for (int j = i + 1; j < occurrences.size(); j++) {
+                if (occurrences.get(i).isClashingWith(occurrences.get(j))) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 }

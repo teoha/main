@@ -26,6 +26,9 @@ public class TripList extends ConsecutiveOccurrenceList<Trip> {
     @Override
     public void add(Trip toAdd) {
         requireNonNull(toAdd);
+        if(containsClashing(toAdd)){
+            throw new ClashingTripException();
+        }
         internalList.add(toAdd);
     }
 
@@ -53,20 +56,23 @@ public class TripList extends ConsecutiveOccurrenceList<Trip> {
     }
 
     @Override
-    public void set(ConsecutiveOccurrenceList<Trip> replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+    public void set(List<Trip> occurrences) {
+        requireAllNonNull(occurrences);
+        if(!areConsecutive(occurrences)){
+            throw new ClashingTripException();
+        }
+        internalList.setAll(occurrences);
     }
 
     @Override
-    public void set(List<Trip> persons) {
-        requireAllNonNull(persons);
-
-        internalList.setAll(persons);
-    }
-
-    @Override
-    public boolean areConsecutive(List<Trip> persons) {
+    public boolean areConsecutive(List<Trip> occurrences) {
+        for (int i = 0; i < occurrences.size() - 1; i++) {
+            for (int j = i + 1; j < occurrences.size(); j++) {
+                if (occurrences.get(i).isClashingWith(occurrences.get(j))) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 }

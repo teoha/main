@@ -16,7 +16,7 @@ public interface TravelPalStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getTravelPalFilePath();
 
     /**
      * Returns TravelPal data as a {@link ReadOnlyTravelPal}.
@@ -24,23 +24,23 @@ public interface TravelPalStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyTravelPal> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTravelPal> readTravelPal() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getTravelPalFilePath()
      */
-    Optional<ReadOnlyTravelPal> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyTravelPal> readTravelPal(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyTravelPal} to the storage.
-     * @param addressBook cannot be null.
+     * @param travelPal cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyTravelPal addressBook) throws IOException;
+    void saveTravelPal(ReadOnlyTravelPal travelPal) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyTravelPal)
+     * @see #saveTravelPal(ReadOnlyTravelPal)
      */
-    void saveAddressBook(ReadOnlyTravelPal addressBook, Path filePath) throws IOException;
+    void saveTravelPal(ReadOnlyTravelPal travelPal, Path filePath) throws IOException;
 
 }

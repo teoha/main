@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.itinerary.Expenditure;
@@ -49,7 +48,7 @@ public class JsonAdaptedTrip {
         this.name = source.getName().fullName;
         this.from = source.getFrom().date.getTime();
         this.to = source.getTo().date.getTime();
-        this.destination = source.getDestintaion().value;
+        this.destination = source.getDestination().value;
         this.totalBudget = source.getTotalBudget().value;
         this.dayList.addAll(source.getDayList()
                 .asUnmodifiableObservableList()
