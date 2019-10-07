@@ -12,17 +12,28 @@ import java.util.Optional;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * Represents a Trip in TravelPal.
+ * Compulsory fields: name, startDate, endDate, destination, dayList.
+ * Optional fields: totalBudget.
+ */
 public class Trip {
+    // Compulsory Fields
     private final Name name;
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
     private final TripId tripId;
     private final Location destination;
-    private final Expenditure totalBudget;
     private final DayList dayList;
 
+    // Optional Fields
+    private final Expenditure totalBudget;
+
+    /**
+     * Constructs a trip.
+     */
     public Trip (Name name, LocalDateTime startDate, LocalDateTime endDate,
-                Location destination, Expenditure totalBudget, DayList dayList) {
+                      Location destination, Expenditure totalBudget, DayList dayList) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -32,6 +43,27 @@ public class Trip {
         this.tripId = new TripId();
     }
 
+    /**
+     * Constructs a trip with optional totalBudget field.
+     */
+    public Trip (Name name, LocalDateTime startDate, LocalDateTime endDate,
+                 Location destination, Optional<Expenditure> totalBudget, DayList dayList) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.destination = destination;
+        if(totalBudget.isPresent()) {
+            this.totalBudget = totalBudget.get();
+        } else {
+            this.totalBudget = null;
+        }
+        this.dayList = dayList;
+        this.tripId = new TripId();
+    }
+
+    /**
+     * Constructor for {@link Builder}.
+     */
     private Trip (Builder builder) {
         try {
             requireAllNonNull(builder.name, builder.startDate, builder.endDate);
@@ -136,6 +168,10 @@ public class Trip {
         return builder.toString();
     }
 
+    /**
+     * Builder class to accommodate optional properties using builder pattern.
+     * Can be used to construct {@link Trip} without optional fields.
+     */
     private static class Builder {
         private Name name;
         private LocalDateTime startDate;
@@ -181,6 +217,9 @@ public class Trip {
             return this;
         }
 
+        /**
+         * Terminal method to construct new {@link Trip}.
+         */
         public Trip build(){
             return new Trip(this);
         }

@@ -12,15 +12,26 @@ import java.util.Optional;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * Represents a Event in TravelPal.
+ * Compulsory fields: name, startDate, endDate, destination.
+ * Optional fields: totalBudget, booking, inventory.
+ */
 public class Event {
+    // Compulsory fields
     private final Name name;
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
-    private final Booking booking;
     private final Location destination;
-    private final Expenditure totalBudget;
-    private final Inventory inventory;
 
+    // Optional fields
+    private final Inventory inventory;
+    private final Expenditure totalBudget;
+    private final Booking booking;
+
+    /**
+     * Constructs an {@code event}.
+     */
     public Event(Name name, LocalDateTime startDate, LocalDateTime endDate, Booking booking, Expenditure totalBudget, Inventory inventory, Location destination) {
         requireAllNonNull(name, startDate, endDate, booking, totalBudget, inventory);
         this.name = name;
@@ -43,7 +54,25 @@ public class Event {
         this.totalBudget = totalBudget;
         this.inventory = null;
     }
+    /**
+     * Constructs a trip with optional totalBudget field.
+     */
+    public Event(Name name, LocalDateTime startDate, LocalDateTime endDate, Optional<Expenditure> totalBudget, Location destination) {
+        requireAllNonNull(name, startDate, endDate, totalBudget);
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.booking = null;
+        this.destination = destination;
+        if(totalBudget.isPresent()) {
+            this.totalBudget = totalBudget.get();
+        } else{
+            this.totalBudget = null;
+        }
+        this.inventory = null;
+    }
 
+    /**Constructor for {@link Builder} */
     private Event(Builder builder){
         try {
             requireAllNonNull(builder.name, builder.startTime, builder.endTime);
@@ -73,8 +102,8 @@ public class Event {
         return endDate;
     }
 
-    public Optional<Booking> getBooking() {
-        return Optional.ofNullable(booking);
+    public Location getDestination() {
+        return destination;
     }
 
     // Optional field getters
@@ -86,8 +115,8 @@ public class Event {
         return Optional.ofNullable(inventory);
     }
 
-    public Optional<Location> getDestination() {
-        return Optional.ofNullable(destination);
+    public Optional<Booking> getBooking() {
+        return Optional.ofNullable(booking);
     }
 
     /**
@@ -109,6 +138,10 @@ public class Event {
                 || (this.getEndDate().compareTo(other.getStartDate()) == -1 && this.getStartDate().compareTo(other.getEndDate()) == 1);
     }
 
+    /**
+     * Builder class to accommodate optional properties using builder pattern.
+     * Can be used to construct {@link Event} without optional fields.
+     */
     private static class Builder {
         private Name name;
         private LocalDateTime startTime;
