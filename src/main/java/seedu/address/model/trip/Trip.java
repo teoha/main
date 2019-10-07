@@ -7,6 +7,9 @@ import seedu.address.model.itinerary.Name;
 import seedu.address.model.itinerary.day.DayList;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class Trip {
     private final Name name;
@@ -17,7 +20,7 @@ public class Trip {
     private final Expenditure totalBudget;
     private final DayList dayList;
 
-    public Trip(Name name, LocalDateTime startDate, LocalDateTime endDate,
+    public Trip (Name name, LocalDateTime startDate, LocalDateTime endDate,
                 Location destination, Expenditure totalBudget, DayList dayList) {
         this.name = name;
         this.startDate = startDate;
@@ -28,6 +31,20 @@ public class Trip {
         this.tripId = new TripId();
     }
 
+    private Trip (Builder builder) {
+        requireAllNonNull(builder.name, builder.startDate, builder.endDate);
+        this.name = builder.name;
+        this.startDate = builder.startDate;
+        this.endDate = builder.endDate;
+        this.destination = builder.destination;
+        this.totalBudget = builder.totalBudget;
+        this.dayList = builder.dayList;
+        this.tripId = new TripId();
+
+    }
+
+
+    //Compulsory field getters
     public Name getName() {
         return name;
     }
@@ -48,12 +65,13 @@ public class Trip {
         return destination;
     }
 
-    public Expenditure getBudget() {
-        return totalBudget;
-    }
-
     public DayList getDayList() {
         return dayList;
+    }
+
+    // Optional field getters
+    public Optional<Expenditure> getBudget() {
+        return Optional.ofNullable(totalBudget);
     }
 
     /**
@@ -111,5 +129,56 @@ public class Trip {
                 .append(totalBudget.toString());
 
         return builder.toString();
+    }
+
+    private static class Builder {
+        private Name name;
+        private LocalDateTime startDate;
+        private LocalDateTime endDate;
+        private Location destination;
+        private Expenditure totalBudget;
+        private DayList dayList;
+
+        public static Builder newInstance (){
+            return new Builder();
+        }
+
+        private Builder(){
+        }
+
+        public Builder setName(Name name){
+            this.name = name;
+            return this;
+        }
+
+        public Builder setStartDate(LocalDateTime startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+
+        public Builder setEndDate(LocalDateTime endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+
+        public Builder setLocation (Location location) {
+            this.destination = location;
+            return this;
+        }
+
+        public Builder setTotalBudget (Expenditure totalBudget){
+            this.totalBudget = totalBudget;
+            return this;
+        }
+
+        public Builder setDayList (DayList dayList) {
+            this.dayList = dayList;
+            return this;
+        }
+
+        public Trip build(){
+            return new Trip(this);
+        }
+
     }
 }

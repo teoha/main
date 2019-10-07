@@ -48,7 +48,7 @@ public class JsonAdaptedTrip {
         this.startDate = source.getStartDate();
         this.endDate = source.getEndDate();
         this.destination = source.getDestination().value;
-        this.totalBudget = source.getBudget().value;
+        this.totalBudget = source.getBudget().orElse(new Expenditure(0)).value;
         this.dayList.addAll(source.getDayList()
                 .asUnmodifiableObservableList()
                 .stream().map(JsonAdaptedDay::new)
