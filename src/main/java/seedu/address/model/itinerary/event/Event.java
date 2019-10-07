@@ -5,6 +5,7 @@ import seedu.address.model.inventory.Inventory;
 import seedu.address.model.itinerary.Expenditure;
 import seedu.address.model.itinerary.Location;
 import seedu.address.model.itinerary.Name;
+import seedu.address.model.itinerary.event.exceptions.CompulsoryFieldEmptyException;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -44,7 +45,11 @@ public class Event {
     }
 
     private Event(Builder builder){
-        requireAllNonNull(builder.name, builder.startTime, builder.endTime);
+        try {
+            requireAllNonNull(builder.name, builder.startTime, builder.endTime);
+        } catch (NullPointerException e) {
+            throw new CompulsoryFieldEmptyException();
+        }
         this.name = builder.name;
         this.startDate = builder.startTime;
         this.endDate = builder.endTime;

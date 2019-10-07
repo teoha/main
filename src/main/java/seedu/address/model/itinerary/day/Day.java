@@ -4,6 +4,7 @@ import seedu.address.model.itinerary.Description;
 import seedu.address.model.itinerary.Expenditure;
 import seedu.address.model.itinerary.Location;
 import seedu.address.model.itinerary.Name;
+import seedu.address.model.itinerary.day.exceptions.CompulsoryFieldEmptyException;
 import seedu.address.model.itinerary.event.EventList;
 
 import java.time.LocalDateTime;
@@ -32,7 +33,11 @@ public class Day {
     }
 
     private Day (Builder builder) {
-        requireAllNonNull(builder.name, builder.startDate, builder.endDate);
+        try {
+            requireAllNonNull(builder.name, builder.startDate, builder.endDate);
+        } catch (NullPointerException e) {
+            throw new CompulsoryFieldEmptyException();
+        }
         this.name = builder.name;
         this.startDate = builder.startDate;
         this.endDate = builder.endDate;
